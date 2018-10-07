@@ -6,10 +6,12 @@ openshift.withCluster() {
   
   def projectBase = "pipelines-user1"
   echo "Starting Pipeline for ${NAMESPACE}..."
-  env.USER_NAME= "${env.NAMESPACE}".tokenize('-').last()
-  env.STAGE0 = "pipelines-{env.USER_NAME}"
-  env.STAGE1 = "devenv-{env.USER_NAME}"
-  env.STAGE2 = "stageenv-{env.USER_NAME}"
+  env.USER_NAME= "${NAMESPACE}".tokenize('-').last()
+  
+  echo "Starting Pipeline for ${USER_NAME}..."
+  env.STAGE0 = "pipelines-${USER_NAME}"
+  env.STAGE1 = "devenv-${USER_NAME}"
+  env.STAGE2 = "stageenv-${USER_NAME}"
   
  
   
