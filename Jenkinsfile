@@ -3,7 +3,9 @@ openshift.withCluster() {
   env.POM_FILE = env.BUILD_CONTEXT_DIR ? "${env.BUILD_CONTEXT_DIR}/pom.xml" : "pom.xml"
   env.APP_NAME = "springboot-noun-service"
   echo "Starting Pipeline for ${APP_NAME}..."
+  
   def projectBase = "pipelines-user1"
+  echo "Starting Pipeline for ${NAMESPACE}..."
   env.STAGE0 = "pipelines-user1"
   env.STAGE1 = "devenv-user1"
   env.STAGE2 = "stageenv-user1"
