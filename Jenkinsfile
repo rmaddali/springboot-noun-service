@@ -92,22 +92,7 @@ pipeline {
       }
     }
 
-    stage ('Verify Deployment to Dev') {
-      steps {
-        script {
-          openshift.withCluster() {
-              openshift.withProject("${STAGE1}") {
-              def dcObj = openshift.selector('dc', env.APP_NAME).object()
-              def podSelector = openshift.selector('pod', [deployment: "${APP_NAME}-${dcObj.status.latestVersion}"])
-              podSelector.untilEach {
-                  echo "pod: ${it.name()}"
-                  return it.object().status.containerStatuses[0].ready
-              }
-            }
-          }
-        }
-      }
-    }
+   
 
     stage('Promote from Dev to Stage') {
       steps {
@@ -119,22 +104,7 @@ pipeline {
       }
     }
 
-    stage ('Verify Deployment to Stage') {
-      steps {
-        script {
-          openshift.withCluster() {
-              openshift.withProject("${STAGE2}") {
-              def dcObj = openshift.selector('dc', env.APP_NAME).object()
-              def podSelector = openshift.selector('pod', [deployment: "${APP_NAME}-${dcObj.status.latestVersion}"])
-              podSelector.untilEach {
-                  echo "pod: ${it.name()}"
-                  return it.object().status.containerStatuses[0].ready
-              }
-            }
-          }
-        }
-      }
-    }
+    
     
 
    
