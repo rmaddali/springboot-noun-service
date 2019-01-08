@@ -1,15 +1,25 @@
 
  package org.springboot.noun.service.model;
 
+ import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Noun
+ @Entity
+public class Noun implements Serializable
 {
+  private static final long serialVersionUID = 5429363222735167394L;
+
   private String noun;
+  @Id
+  @Column(length = 40, updatable = false, nullable = false)
+  private String nounId;
   
   public Noun() {}
   
-  public Noun(String noun)
+  public Noun(String nounId,String noun)
   {
     this.noun = noun;
   }
