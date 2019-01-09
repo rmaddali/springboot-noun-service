@@ -11,23 +11,19 @@
  */
 package org.springboot.noun.service;
 
+import org.springboot.noun.service.model.Noun;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+
+import javax.annotation.PostConstruct;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.Reader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicLong;
-import java.util.function.Consumer;
-import java.util.stream.Stream;
-import javax.annotation.PostConstruct;
-import org.springboot.noun.service.model.Noun;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 
@@ -48,7 +44,7 @@ public class NounServiceController {
             if (is != null) {
                 BufferedReader reader = new BufferedReader(new InputStreamReader(is));
                 reader.lines().forEach(noun -> {
-                    this.nouns.add(new Noun(noun.trim()));
+                    this.nouns.add(new Noun("1",noun.trim()));
                 }
                 );
             }
